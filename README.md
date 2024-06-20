@@ -14,142 +14,136 @@ Objectif :
 
 ******************************************************************************************
 
-Pour le moment on est besoin de faire creer un projet java simple pour faire paratique mieux en mieux l'application Soap qui est basé sur l'ajax apres vous pouvez faire creer un projet Spring si vous voulez : 
+Pour le moment, nous avons besoin de créer un projet Java simple pour mieux pratiquer l'application SOAP basée sur JAX-WS. Plus tard, vous pouvez créer un projet Spring si vous le souhaitez.
 
-aLors maintenant on va essayer faire un creer un package qui va contenir les deux classe Compte et BanqueCompte
-comme suite :
-   - La classe Compte : 
+Maintenant, nous allons créer un package qui contiendra les deux classes Compte et BanqueCompte comme suit :
+
+#### Classe Compte : 
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/78dd5631-1e0b-4d80-a89c-502b9afcf237)
 
-   - La classe CompteBanque : 
+#### La classe CompteBanque : 
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/b01c85a4-09d2-46b6-81c5-f9bc0dbf46c8)
 
-Commr on vois dans les deux classe on a quelque anotation qu'il faut connaitre qui sont lie au Web Service
+Comme on peut le voir dans les deux classes, nous avons quelques annotations qu'il faut connaître et qui sont liées au Web Service.
 
-Mais en genrale avant d'tiliser ces notaion il faut ajouter la dependance de JAX-WS dans votre projet : 
+Mais en général, avant d'utiliser ces annotations, il faut ajouter la dépendance JAX-WS dans votre projet :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/732999a4-8327-4c3f-9376-03dd1b5d84c0)
 
-une fois que vous avez cette dependance faire reload de vore proje maven , puis vous pouves utliser les anotattions quk sont utliserr pour un wevb service : 
+Une fois que vous avez cette dépendance, rechargez votre projet Maven, puis vous pouvez utiliser les annotations pour un Web Service.
 
-le service web SOAP CompteBanque , développé en utilisant Jakarta EE, est conçu pour simuler des opérations bancaires de base. Le service, nommé BanqueWs, expose trois méthodes principales :
+Le service web SOAP CompteBanque, développé en utilisant Jakarta EE, est conçu pour simuler des opérations bancaires de base. Le service, nommé BanqueWs, expose trois méthodes principales :
 
-    Conversion de devises : Une méthode qui convertit un montant en euros en dirhams
-    marocains en utilisant un taux de conversion fixe.
-    
-    Récupération de compte : Une méthode qui retourne les détails d'un compte bancaire,
-    incluant un solde généré aléatoirement et la date actuelle, basé sur un identifiant
-    de compte fourni.
-    
-    Liste des comptes : Une méthode qui retourne une liste de comptes avec des soldes
-    aléatoires et la date actuelle, simulant des comptes bancaires multiples.
+    - Conversion de devises : Une méthode qui convertit un montant en euros en dirhams
+      marocains en utilisant un taux de conversion fixe.
+    - Récupération de compte : Une méthode qui retourne les détails d'un compte
+      bancaire, incluant un solde généré aléatoirement et la date actuelle, basé sur un 
+      dentifiant de compte fourni.
+    - Liste des comptes : Une méthode qui retourne une liste de comptes avec des soldes
+      aléatoires et la date actuelle, simulant plusieurs comptes bancaires.
 
-Les méthodes utilisent des annotations Jakarta pour définir les opérations de service web et les paramètres, permettant ainsi une interaction facile et standardisée avec des clients SOAP. 
 
-La classe Compte (non incluse dans le résumé) représente un compte bancaire avec des attributs tels que le code du compte, le solde et la date de création. 
-Ces méthodes peuvent être appelées par des clients pour effectuer des opérations bancaires simulées.
+Les méthodes utilisent des annotations Jakarta pour définir les opérations de service web et les paramètres, permettant ainsi une interaction facile et standardisée avec des clients SOAP.
 
-Alors voici une petit explication sur les annotation du web Service :
+La classe Compte (non incluse dans le résumé) représente un compte bancaire avec des attributs tels que le code du compte, le solde et la date de création. Ces méthodes peuvent être appelées par des clients pour effectuer des opérations bancaires simulées.
 
-  @WebService
-    Description : Indique que la classe représente un service web SOAP.
-    Exemple d'utilisation : @WebService(serviceName = "BanqueWs")
-    Rôle : Marque la classe comme un service web et spécifie le nom du service.
-    
-  @WebMethod
-    Description : Indique qu'une méthode de la classe est une opération de service web.
-    Exemple d'utilisation : @WebMethod(operationName = "conversionEuroToDH")
-    Rôle : Marque une méthode pour qu'elle soit exposée comme une opération de service
-    web. L'attribut operationName permet de spécifier un nom différent pour l'opération,
-    si nécessaire.
-    
-  @WebParam
-    Description : Spécifie le nom d'un paramètre d'une méthode de service web.
-    Exemple d'utilisation : @WebParam(name = "mantant")
-    Rôle : Renomme les paramètres dans la description WSDL du service, ce qui améliore la
-    clarté et la lisibilité pour les clients du service.
+Voici une petite explication sur les annotations du Web Service :
 
-Alors apres quand on a essayer de faire creer un service , il faut le deployer  alors la simple facon jusqu'a maintenant est de faire creer un simple serveur Ws , 
+######    @WebService
+    - Description : Indique que la classe représente un service web SOAP.
+    - Exemple d'utilisation : @WebService(serviceName = "BanqueWs")
+    - Rôle : Marque la classe comme un service web et spécifie le nom du service.
 
-et pour ca on va  essayer de creer une classe quand on va lui donne comme nom ServeurWs 
-ALors cette classe contient la methode main , en suite  : 
-    en demarrenotre serveur a l'aide de l'intruction : 
-            String url = "http://0.0.0.0:9090/" ;
-            // on specifier une adresse dans URL si on veut que ontre service soit
-            accessible a distants sinon  je peut lance le service locale : specifait localhost au lieyu de l'adresse
-            // Endpoint.publish("http://0.0.0.0:9090/" , new BanqueService()) ;
-            Endpoint.publish(url , new BanqueService()) ;
+######    @WebMethod
+    - Description : Indique qu'une méthode de la classe est une opération de service web.
+    - Exemple d'utilisation : @WebMethod(operationName = "conversionEuroToDH")
+    - Rôle : Marque une méthode pour qu'elle soit exposée comme une opération de service
+      web. L'attribut operationName permet de spécifier un nom différent pour
+      l'opération, si nécessaire.
 
+######    @WebParam
+    - Description : Spécifie le nom d'un paramètre d'une méthode de service web.
+    - Exemple d'utilisation : @WebParam(name = "montant")
+    - Rôle : Renomme les paramètres dans la description WSDL du service, ce qui améliore
+      la clarté et la lisibilité pour les clients du service.
+
+Après avoir créé un service, il faut le déployer. La manière la plus simple pour l'instant est de créer un serveur JaxWS simple. Pour cela, nous allons créer une classe nommée ServeurWs qui contiendra la méthode main :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/6ed9e311-d175-4349-b87d-b0da8177877f)
 
-Alors Voici leS resulatS quand on va voir apres le run de code : 
+Après avoir exécuté ce code, voici les résultats obtenus :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/0030144f-4ee8-4b98-896a-495d014a147b)
 
-Voici la descirption de notre service sous forme XML tel que on trouve une descrption de notre service CompteBanque et la classe Banque c'est a dire la description des defferent  atrribue et deffirent methode utliser dans notre petit porjet : 
+Voici la description de notre service sous forme XML telle qu'on trouve une description de notre service CompteBanque et de la classe Banque, c'est-à-dire la description des différents attributs et méthodes utilisés dans notre petit porjet : 
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/3a839f3f-4886-4d8b-9931-4ec29ba736bc)
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/b8d7e419-0e83-4555-9d19-7611c45aeb19)
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/a242c7bf-7624-41e0-9a46-1b2badeb9d47)
-Alors pour simpliferi on peut dire qu'un wsdl est base sur une schema XMl dont laquel on declarre pour chaque input et pour chaque out qu'il est le type de donne utliser  donc c'est pour ce la on utilise les schema XML  pour les WSDL qui sont base sur SPOAP
 
+Pour simplifier, on peut dire qu'un WSDL est basé sur un schéma XML dans lequel on déclare pour chaque input et chaque output quel est le type de donnée utilisé. C'est pour cela que nous utilisons les schémas XML pour les WSDL basés sur SOAP.
 
-maintenat on  a arrive a la troisimme partie c'est comment  faire tester notre WSDL  
+*****************************************************************************************
+## Test du WSDL
+Avant de continuer, il faut savoir que :
 
-alors mais avant  de continuer il faut connaitre que : 
-si vous aves locasion faire tester un web service  
+si vous aves locasion de tester un web service :  
 
-    - la premier question qu'il faut poser c'est  qu'il type de web service ?
-      est ce que c'est un service base sur le soap , rest ou bien graphe QL ou bien GRPC
-      
-et bien si le teste web service est de type Soap  alors la deusimme question qu'il faut poser  c'est : 
-     donne moi le WSDL alors quand vous poser cette question dons vous savez vraiment qu'est ce que vous faites 
-    mais si vous commance a poser des questions sur le langage qui et developer  pour faire tester le service  =====> alors ça indique que vous n'avez rien comprits
-    parce que pour que j'arrive de faire consomer le service en tanque client j'ai besoin seulment au WSDL  
+####        La première question à poser pour tester un web service est :
+            quel type de web service est-ce ? Est-ce un service basé sur SOAP, REST,
+            GraphQL, ou GRPC ?
+####        Si le test du web service est de type SOAP, 
+            alors la deuxième question à poser est : donnez-moi le WSDL. 
+            En posant cette question, vous montrez que vous savez ce que vous faites. Si
+            vous commencez à poser des questions sur le langage de développement du
+            service, cela indique que vous n'avez pas compris le concept. 
+            Pour consommer le service en tant que client, vous avez uniquement besoin du
+            WSDL.
 
-Alors pour nous maintenant on va utiliser  soap open source pour faire le teste  : 
-afin de creer un nouveu Soap Project on et faire copier http://localhost:9090/BanqueWs?wsdl dans le champs WSDL 
-voici ce quant va trouver comme resultat afin de faire teste la methode ConversionEuroToDH : 
+Maintenant, nous allons utiliser SoapUI open source pour tester :
+    1. Créez un nouveau projet SoapUI.
+    2. Copiez l'URL http://localhost:9090/BanqueWs?wsdl dans le champ WSDL.
+    3. Voici les résultats obtenus pour tester la méthode ConversionEuroToDH :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/a43a68ea-3cd8-4250-b04b-0e5578ef2381)
 
-teste pour faire la consultation  d'un compte : 
+    4. Test de la Consultation d'un Compte : 
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/cbb62bfd-5544-48c0-8115-6e0b688ca170)
 
-on a ici un petit probleme dans date de creation d'un compte alors il est prifirable faire changer dans le code le type de ce dernier vers Date et voici le rsulat afin de tester sur le soap open source  : 
+Nous avons rencontré un petit problème avec le type de la date de création d'un compte. Il est préférable de changer le type de ce dernier en Date. Voici le résultat après avoir testé sur SoapUI :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/42326d8c-67c9-4ff9-a8f4-282c95e755c2)
 
-Alors Voici un teste pour le listage des  produits :
+    5. Test de la Liste des Comptes :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/e4d4f418-1cda-413e-b267-60068b378ff3)
 
 
 
 *******************************************************************************************************************************************************************************************************
-Alors notre bute maintenant est de faire creer un Client qui va consommer un web service soit on creant un nouveux projet separer
-ou bein en creant un modul maven  quand on va m'apple par exmple client-soap-Java
+## Création d'un Client SOAP Java
+Notre objectif maintenant est de créer un client qui va consommer un web service. Vous pouvez le faire en créant un nouveau projet séparé ou en créant un module Maven que vous appellerez par exemple client-soap-java.
 
-Alors pour ce client la on est besoin de faire ajouter la dependance jax-ws dans pom.Xml 
+Ajoutez la dépendance JAX-WS dans le pom.xml.
 
-alors pour creer le client je suis besoin d'un WSDL a partie de ce dernier on va generer  un  PROXY qui est un ensemple de classe que je dois generer a partir de WSDL  qui vont permetre a mon application java de communiquer avec le web service 
+Pour créer le client, je dois utiliser un WSDL à partir duquel je vais générer un proxy, qui est un exemple de classe permettant à mon application Java de communiquer avec le web service.
 
-alors pour generer ce proxy si vous utlisez intellij donc c'est simple de le faire seulement avec un seul click
-voici comment : 
-dans Help on cherche |find action|-----> en cherche sur |generate code java from WSDL| ----->en suite on va trouver comme cette fenetre :![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/c73caedd-b969-4801-865b-182fb75969c5)
+Si j'utilise IntelliJ, je peux le faire facilement en un seul clic. Voici comment procéder :
 
-on specifiant le WSDL 
-et dans le package prefix en specifiant : proxy  
-et pour service plat form en choisie : Glassfich/...../JWSDP2.2
+    1. Dans le menu Help, recherchez "find action".
+    2. Recherchez "generate code java from WSDL".
+    3. Vous trouverez une fenêtre comme celle-ci :
+![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/c73caedd-b969-4801-865b-182fb75969c5)
 
-et comme ca un package proxi va etre ajouter dans notre module 
+    4. Spécifiez le chemin vers le WSDL.
+    5. Dans le champ "Package prefix", spécifiez "proxy".
+    6. Pour la plateforme de service, choisissez "Glassfish/...../JWSDP2.2".
 
-Alors l'etape suivant est de tester le  web service 
+Cela ajoutera un package "proxy" à votre module.
 
-on faire dans le fichier main de ce module quelque modification comme suite : 
+Ensuite, l'étape suivante consiste à tester le web service. Dans le fichier main de ce module, apportez les modifications suivantes :
 ![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/d1bbdd85-ae50-43e4-b1e8-8e5ad2e19937)
 
-A savoir  : 
+### Note:  
+        À noter que nous sommes en train de concevoir une application orientée objet
+        distribuée.
 
-que maintenant on est entrain de faire concevoir une application oriente objet destribué 
+Avant de conclure, voici un code utilisé pour tester notre service ainsi que les résultats obtenus.
+![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/329a4af7-3195-4773-ab5c-b8759c909c76)
+![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/72030334-9342-4a69-b011-80c7749d675f)
 
 
-
-
-
-
-
+![image](https://github.com/ayoubbenlahcen/TP5-ws-soap---MIAAD---SD---FSM--2024/assets/152870306/86b57f4d-22e8-4c79-9337-26927802a3e2)
